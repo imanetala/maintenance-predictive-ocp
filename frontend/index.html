@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maintenance Prédictive — OCP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<link rel="stylesheet" href="/css/style.css?v=4">
+<link rel="stylesheet" href="/css/shell.css?v=4">
+<link rel="stylesheet" href="/css/pages.css?v=4">
+<link rel="stylesheet" href="/css/animations.css?v=4">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ======================== SIDEBAR ======================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__brand">
+      <div class="sidebar__logo">
+        <svg width="34" height="34" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="38" height="38" rx="10" fill="url(#logo-grad)"/>
+          <path d="M19 11.5a3 3 0 100 6 3 3 0 000-6z" fill="#fff"/>
+          <path d="M19 8.5v2.2m0 11.6V24.5m6-3.5l-1.6-1m-8.8 0l-1.6 1M25 14.1l-1.6 1m-8.8 0l-1.6-1" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M9.5 28l3.2-2.8 2.5 1.8 3.8-3.2 3.8 3.2 2.5-1.8L28.5 28" stroke="#A7F3D0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="0" y1="0" x2="38" y2="38">
+              <stop stop-color="#10B981"/>
+              <stop offset="1" stop-color="#047857"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="sidebar__brand-text">
+        <div class="sidebar__title" data-i18n="nav.sidebar_titre">Maintenance</div>
+        <div class="sidebar__subtitle" data-i18n="nav.sidebar_sous_titre">Suite Prédictive</div>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <div class="nav-section">
+        <div class="nav-label" data-i18n="nav.principal">Principal</div>
+        <button class="nav-item active" type="button" data-page="accueil"><i data-lucide="home" class="nav-icon"></i><span data-i18n="nav.accueil">Accueil</span></button>
+        <button class="nav-item" type="button" data-page="dashboard"><i data-lucide="gauge" class="nav-icon"></i><span data-i18n="nav.dashboard">Tableau de bord</span></button>
+        <button class="nav-item" type="button" data-page="prediction"><i data-lucide="zap" class="nav-icon"></i><span data-i18n="nav.prediction">Prédiction IA</span></button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label" data-i18n="nav.surveiller">Surveiller</div>
+        <button class="nav-item" type="button" data-page="analytics"><i data-lucide="pie-chart" class="nav-icon"></i><span data-i18n="nav.analytics">Analytics</span></button>
+        <button class="nav-item" type="button" data-page="historique"><i data-lucide="history" class="nav-icon"></i><span data-i18n="nav.historique">Historique</span></button>
+        <button class="nav-item" type="button" data-page="monitoring"><i data-lucide="activity" class="nav-icon"></i><span data-i18n="nav.monitoring">Monitoring modèle</span></button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label" data-i18n="nav.operer">Opérer</div>
+        <button class="nav-item" type="button" data-page="alertes">
+          <i data-lucide="bell" class="nav-icon"></i><span data-i18n="nav.alertes">Centre d'alertes</span>
+          <span class="nav-badge" id="navBadgeAlertes">0</span>
+        </button>
+        <button class="nav-item" type="button" data-page="rapports"><i data-lucide="file-text" class="nav-icon"></i><span data-i18n="nav.rapports">Rapports</span></button>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label" data-i18n="nav.systeme">Système</div>
+        <button class="nav-item" type="button" data-page="parametres"><i data-lucide="settings" class="nav-icon"></i><span data-i18n="nav.parametres">Paramètres</span></button>
+        <button class="nav-item" type="button" data-page="apropos"><i data-lucide="info" class="nav-icon"></i><span data-i18n="nav.apropos">À propos</span></button>
+      </div>
+    </nav>
+
+    <div class="sidebar__model">
+      <span class="model-dot"></span>
+      <div class="sidebar__model-text">
+        <div class="model-name">Random Forest</div>
+        <div class="model-status" data-i18n="monitoring.modele_actif">En ligne · Recall 78%</div>
+      </div>
+    </div>
+
+    <div class="sidebar__user" id="sidebarUser">
+      <div class="user-avatar" id="userAvatar">--</div>
+      <div class="user-info">
+        <div class="user-name" id="userName" data-i18n="commun.chargement">Chargement…</div>
+        <div class="user-role" id="userRole">—</div>
+      </div>
+      <button class="logout-btn" id="btnLogout" type="button"><i data-lucide="log-out"></i></button>
+    </div>
+  </aside>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- ======================== MAIN ======================== -->
+  <div class="main">
+    <header class="topbar">
+      <button class="topbar__toggle" id="sidebarToggle" type="button" aria-label="Toggle sidebar">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <div class="topbar__left">
+        <h1 class="topbar__title" data-i18n="nav.accueil">Accueil</h1>
+        <p class="topbar__subtitle" data-i18n="accueil.sous_titre">Plateforme de maintenance prédictive</p>
+      </div>
+
+      <div class="topbar__search">
+        <span class="search-icon"><i data-lucide="search"></i></span>
+        <input type="text" placeholder="Rechercher…" id="rechercheGlobale" data-i18n-placeholder="topbar.recherche">
+      </div>
+
+      <div class="topbar__right">
+        <div class="topbar__datetime">
+          <span class="topbar__clock" id="horloge">--:--</span>
+          <span class="topbar__date" id="dateJour">—</span>
+        </div>
+
+        <button class="topbar__icon-btn" id="toggleThemeTopbar" type="button" data-i18n-title="topbar.theme" data-tooltip-bottom="Thème">
+          <i data-lucide="moon" id="iconTheme"></i>
+        </button>
+
+        <div class="notif-wrapper">
+          <button class="topbar__icon-btn" id="btnCloche" type="button" data-i18n-title="topbar.notifications" data-tooltip-bottom="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="icon-badge" id="clocheBadge">0</span>
+          </button>
+          <div class="notif-dropdown" id="notifDropdown">
+            <div class="notif-dropdown__header">
+              <h4 data-i18n="topbar.notifications">Notifications</h4>
+              <button class="btn-ghost btn-ghost--sm" id="btnToutMarquerLu" type="button" data-i18n="notif.tout_marquer_lu">Tout marquer lu</button>
+            </div>
+            <div class="notif-dropdown__list" id="notifList">
+              <div class="notif-empty" data-i18n="notif.aucune_notification">Aucune notification</div>
+            </div>
+            <div class="notif-dropdown__footer">
+              <button class="btn-ghost" id="btnVoirNotifs" type="button" data-i18n="notif.voir_toutes">Voir toutes les notifications</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="fr" type="button">FR</button>
+          <button class="lang-btn" data-lang="en" type="button">EN</button>
+        </div>
+
+        <div class="user-dropdown-wrapper">
+          <div class="topbar__user" id="topbarUser">
+            <div class="topbar__avatar" id="userAvatarTop">--</div>
+            <div class="user-info">
+              <div class="user-name" id="userNameTop" data-i18n="commun.chargement">Chargement…</div>
+              <div class="user-role" id="userRoleTop">—</div>
+            </div>
+            <i data-lucide="chevron-down" class="topbar__chevron"></i>
+          </div>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown__header">
+              <div class="user-dropdown__avatar" id="dropdownAvatar">--</div>
+              <div>
+                <div class="user-dropdown__name" id="dropdownName">—</div>
+                <div class="user-dropdown__role" id="dropdownRole">—</div>
+              </div>
+            </div>
+            <div class="user-dropdown__divider"></div>
+            <div class="user-dropdown__info">
+              <div class="user-dropdown__row">
+                <i data-lucide="mail"></i>
+                <span id="dropdownEmail">—</span>
+              </div>
+              <div class="user-dropdown__row">
+                <i data-lucide="calendar"></i>
+                <span id="dropdownDate">—</span>
+              </div>
+              <div class="user-dropdown__row">
+                <i data-lucide="shield"></i>
+                <span id="dropdownRoleFull">—</span>
+              </div>
+            </div>
+            <div class="user-dropdown__divider"></div>
+            <div class="user-dropdown__actions">
+              <button class="user-dropdown__action" onclick="loadPage('parametres')">
+                <i data-lucide="settings"></i>
+                <span data-i18n="nav.parametres">Paramètres</span>
+              </button>
+              <button class="user-dropdown__action user-dropdown__action--danger" id="btnLogoutTopbar">
+                <i data-lucide="log-out"></i>
+                <span data-i18n="nav.deconnexion">Déconnexion</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-loader" id="page-loader">
+      <div class="spinner"></div>
+    </div>
+
+    <div id="main-content"></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="/js/i18n.js?v=4"></script>
+<script src="/js/auth-guard.js?v=4"></script>
+<script src="/js/chart-theme.js?v=4"></script>
+<script src="/js/app.js?v=4"></script>
+<script src="/js/pages.js?v=4"></script>
+<script src="/js/monitoring.js?v=4"></script>
+<script src="/js/sidebar.js?v=4"></script>
+<script src="/js/navigation.js?v=4"></script>
+<script src="/js/notifications.js?v=4"></script>
+<script>
+  if (typeof lucide !== "undefined") lucide.createIcons();
+</script>
+</body>
+</html>

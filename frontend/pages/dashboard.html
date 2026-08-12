@@ -1,0 +1,48 @@
+<section class="page-section" id="dashboardPage">
+  <div class="page-header">
+    <h2 data-i18n="dashboard.titre">Tableau de bord</h2>
+    <p class="page-subtitle" data-i18n="dashboard.sous_titre">Historique des analyses et évolution du risque</p>
+  </div>
+
+  <div class="toolbar">
+    <select id="filtreEquipement">
+      <option value="" data-i18n="dashboard.tous_equipements">Tous les équipements</option>
+    </select>
+    <select id="filtreStatut">
+      <option value="" data-i18n="dashboard.tous_statuts">Tous les statuts</option>
+      <option value="normal" data-i18n="historique.normal">Normal</option>
+      <option value="panne" data-i18n="prediction.risque_detecte">Risque détecté</option>
+    </select>
+    <button class="btn" id="btnExportCSV">
+      <i data-lucide="download"></i>
+      <span>CSV</span>
+    </button>
+    <button class="btn" id="btnExportPDF">
+      <i data-lucide="file-text"></i>
+      <span>PDF</span>
+    </button>
+  </div>
+
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th data-i18n="prediction.equipement">Équipement</th>
+          <th data-i18n="dashboard.risque">Risque</th>
+          <th data-i18n="dashboard.statut">Statut</th>
+          <th data-i18n="dashboard.heure">Heure</th>
+        </tr>
+      </thead>
+      <tbody id="tbodyHistorique">
+        <tr>
+          <td colspan="4" class="table__empty" data-i18n="dashboard.chargement">Chargement…</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container">
+    <h3 data-i18n="dashboard.evolution_risque">Évolution du risque</h3>
+    <canvas id="graphiqueEvolution"></canvas>
+  </div>
+</section>

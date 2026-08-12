@@ -1,0 +1,70 @@
+<section class="page-section">
+  <div class="kpi-banner stagger">
+    <div class="kpi-card">
+      <div class="kpi-card__value" id="monModele">—</div>
+      <div class="kpi-card__label" data-i18n="monitoring.modele_actif">Modèle actif</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card__value" id="monSeuil">—</div>
+      <div class="kpi-card__label" data-i18n="monitoring.seuil_decision">Seuil décision</div>
+    </div>
+    <div class="kpi-card safe">
+      <div class="kpi-card__value" id="monF1">—</div>
+      <div class="kpi-card__label" data-i18n="monitoring.f1_score">F1-score</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-card__value" id="monConfiance">—</div>
+      <div class="kpi-card__label" data-i18n="monitoring.confiance_moyenne">Confiance moyenne</div>
+    </div>
+  </div>
+
+  <div class="drift-section">
+    <div class="drift-header">
+      <h3 data-i18n="monitoring.data_drift">Data Drift</h3>
+      <span class="mon-badge" id="monDriftBadge">—</span>
+      <span id="monDrift" class="risk-value">—</span>
+    </div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th data-i18n="monitoring.variable">Variable</th>
+            <th data-i18n="monitoring.moy_reference">Moy. référence</th>
+            <th data-i18n="monitoring.moy_actuelle">Moy. actuelle</th>
+            <th data-i18n="monitoring.score_drift">Score drift</th>
+            <th data-i18n="monitoring.statut">Statut</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyDrift">
+          <tr><td colspan="5" class="table__empty" data-i18n="commun.chargement">Chargement…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="live-section">
+    <h3 data-i18n="monitoring.monitoring_temps_reel">Monitoring en temps réel</h3>
+    <div class="live-controls">
+      <button class="btn btn-primary" id="btnDemarrerMonitoring" type="button"><i data-lucide="play"></i><span data-i18n="monitoring.demarrer">Démarrer</span></button>
+      <button class="btn btn-danger" id="btnArreterMonitoring" type="button" style="display:none;"><i data-lucide="square"></i><span data-i18n="monitoring.arreter">Arrêter</span></button>
+    </div>
+    <div class="live-cards stagger">
+      <div class="live-card"><div class="live-card__label" data-i18n="monitoring.temp_air">Temp air</div><div class="live-card__value" id="liveTemp">--</div><div class="live-card__unit">K</div></div>
+      <div class="live-card"><div class="live-card__label" data-i18n="monitoring.temp_proc">Temp proc</div><div class="live-card__value" id="liveTempProc">--</div><div class="live-card__unit">K</div></div>
+      <div class="live-card"><div class="live-card__label" data-i18n="monitoring.rotation">Rotation</div><div class="live-card__value" id="liveRPM">--</div><div class="live-card__unit">rpm</div></div>
+      <div class="live-card"><div class="live-card__label" data-i18n="monitoring.couple">Couple</div><div class="live-card__value" id="liveTorque">--</div><div class="live-card__unit">Nm</div></div>
+      <div class="live-card"><div class="live-card__label" data-i18n="monitoring.tension">Tension</div><div class="live-card__value" id="liveVoltage">--</div><div class="live-card__unit">V</div></div>
+      <div class="live-card"><div class="live-card__label" data-i18n="monitoring.courant">Courant</div><div class="live-card__value" id="liveCurrent">--</div><div class="live-card__unit">A</div></div>
+      <div class="live-card"><div class="live-card__label" data-i18n="monitoring.humidite">Humidité</div><div class="live-card__value" id="liveHumidity">--</div><div class="live-card__unit">%</div></div>
+      <div class="live-card critical"><div class="live-card__label" data-i18n="monitoring.prediction">Prédiction</div><div class="live-card__value" id="livePrediction">--</div><div class="live-card__unit">%</div></div>
+    </div>
+    <div class="analytics-grid">
+      <div class="chart-container hover-lift"><h3 data-i18n="monitoring.capteurs_direct">Capteurs en direct</h3><canvas id="graphiqueLive"></canvas></div>
+      <div class="chart-container hover-lift"><h3 data-i18n="monitoring.prediction_direct">Prédiction en direct</h3><canvas id="graphiqueLivePrediction"></canvas></div>
+    </div>
+  </div>
+
+  <div class="retrain-section">
+    <button class="btn btn-outline" id="btnReentrainer" type="button"><i data-lucide="refresh-cw"></i><span data-i18n="monitoring.reentrainer">Relancer l'entraînement</span></button>
+  </div>
+</section>

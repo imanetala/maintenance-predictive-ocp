@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="login.page_titre">Connexion — Maintenance Prédictive OCP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="/css/login.css"/>
+</head>
+<body>
+<div class="auth">
+
+  <!-- ======================== LEFT COLUMN (60%) ======================== -->
+  <div class="auth-left">
+    <canvas id="loginCanvas" class="auth-left__particles"></canvas>
+
+    <div class="auth-left__content">
+      <!-- Logo -->
+      <div class="auth-left__logo">
+        <svg class="auth-left__logo-icon" width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="38" height="38" rx="10" fill="url(#logo-grad)"/>
+          <path d="M19 11.5a3 3 0 100 6 3 3 0 000-6z" fill="#fff"/>
+          <path d="M19 8.5v2.2m0 11.6V24.5m6-3.5l-1.6-1m-8.8 0l-1.6 1M25 14.1l-1.6 1m-8.8 0l-1.6-1" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M9.5 28l3.2-2.8 2.5 1.8 3.8-3.2 3.8 3.2 2.5-1.8L28.5 28" stroke="#A7F3D0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="0" y1="0" x2="38" y2="38">
+              <stop stop-color="#10B981"/>
+              <stop offset="1" stop-color="#047857"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="auth-left__logo-text">
+          <span class="auth-left__logo-name" data-i18n="login.hero_titre_1">Maintenance Prédictive OCP</span>
+          <span class="auth-left__logo-sub" data-i18n="login.hero_texte">Plateforme intelligente de supervision et de maintenance industrielle.</span>
+        </div>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="auth-left__title">
+        <span data-i18n="login.hero_titre_2">Anticiper les pannes<br/>avant qu'elles <span class="auth-left__title-accent">n'arrivent.</span></span>
+      </h1>
+
+      <!-- Body -->
+      <p class="auth-left__desc" data-i18n="login.hero_description">
+        Système de maintenance prédictive basé sur le Machine Learning — modèle Random Forest entraîné sur le dataset AI4I 2020, supervision en temps réel et diagnostic automatisé des équipements industriels.
+      </p>
+
+      <!-- Feature badges -->
+      <div class="auth-left__features">
+        <div class="feat feat--1">
+          <span class="feat__icon"><i class="fa-solid fa-microchip"></i></span>
+          <span class="feat__label" data-i18n="login.feat_modele">Modèle Random Forest</span>
+        </div>
+        <div class="feat feat--2">
+          <span class="feat__icon"><i class="fa-solid fa-heart-pulse"></i></span>
+          <span class="feat__label" data-i18n="login.feat_supervision">Supervision temps réel</span>
+        </div>
+        <div class="feat feat--3">
+          <span class="feat__icon"><i class="fa-solid fa-shield-halved"></i></span>
+          <span class="feat__label" data-i18n="login.feat_risque">Score de risque</span>
+        </div>
+        <div class="feat feat--4">
+          <span class="feat__icon"><i class="fa-solid fa-chart-line"></i></span>
+          <span class="feat__label" data-i18n="login.feat_historique">Historique &amp; tendances</span>
+        </div>
+      </div>
+
+      <!-- Stats ticker -->
+      <div class="auth-left__ticker">
+        <span class="ticker__item" data-i18n="login.ticker_modele">MODÈLE <span class="ticker__val">RANDOM FOREST</span></span>
+        <span class="ticker__sep">·</span>
+        <span class="ticker__item">F1-SCORE <span class="ticker__val">80.3%</span></span>
+        <span class="ticker__sep">·</span>
+        <span class="ticker__item">DATASET <span class="ticker__val">AI4I 2020</span></span>
+        <span class="ticker__sep">·</span>
+        <span class="ticker__item"><span class="ticker__val">10 000+</span> <span data-i18n="login.ticker_lignes">LIGNES</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== RIGHT COLUMN (40%) ======================== -->
+  <div class="auth-right">
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <div class="auth-right__inner">
+      <!-- Badge -->
+      <div class="login-badge">
+        <i class="fa-solid fa-lock"></i>
+        <span data-i18n="login.badge_acces">ACCÈS SÉCURISÉ</span>
+      </div>
+
+      <!-- Title -->
+      <h2 class="login-title" data-i18n="login.bon_retour">Bon retour</h2>
+      <p class="login-sub" data-i18n="login.bon_retour_desc">Connectez-vous à la console de maintenance prédictive.</p>
+
+      <!-- Error -->
+      <div class="login-error" id="loginError"></div>
+
+      <!-- Form -->
+      <form class="login-form" id="loginForm" autocomplete="off" novalidate>
+        <div class="login-field">
+          <label class="login-field__label" data-i18n="login.label_utilisateur">NOM D'UTILISATEUR</label>
+          <div class="login-field__wrap">
+            <i class="fa-solid fa-user login-field__icon"></i>
+            <input type="text" class="login-field__input" id="username" name="username" placeholder="ex. admin" data-i18n-placeholder="login.placeholder_utilisateur" required autocomplete="username"/>
+          </div>
+        </div>
+
+        <div class="login-field">
+          <label class="login-field__label" data-i18n="login.label_mdp">MOT DE PASSE</label>
+          <div class="login-field__wrap">
+            <i class="fa-solid fa-lock login-field__icon"></i>
+            <input type="password" class="login-field__input" id="password" name="password" placeholder="Saisissez votre mot de passe" data-i18n-placeholder="login.placeholder_mdp" required autocomplete="current-password"/>
+            <button type="button" class="login-field__toggle" id="togglePassword" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="login-form__row">
+          <label class="login-checkbox">
+            <input type="checkbox" name="remember"/>
+            <span class="login-checkbox__mark"></span>
+            <span data-i18n="login.se_souvenir">Se souvenir de moi</span>
+          </label>
+          <a href="#" class="login-link" id="forgotPasswordLink" data-i18n="login.mdp_oublie">Mot de passe oublié ?</a>
+        </div>
+
+        <button type="submit" class="login-btn" id="loginBtn">
+          <span class="login-btn__text" data-i18n="login.se_connecter">Se connecter</span>
+          <i class="fa-solid fa-arrow-right login-btn__arrow"></i>
+        </button>
+      </form>
+
+      <!-- Demo credentials -->
+      <div class="demo-box">
+        <span class="demo-box__label" data-i18n="login.identifiants_demo">Identifiants de démonstration</span>
+        <span class="demo-box__cred">admin / motdepasse123</span>
+      </div>
+
+      <!-- Footer -->
+      <div class="auth-right__footer" data-i18n="login.acces_reserve">
+        Personnel autorisé uniquement · Toutes les sessions sont auditées
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="fp-overlay" id="fpOverlay">
+  <div class="fp-modal">
+    <button class="fp-modal__close" id="fpClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+
+    <!-- Step 1: Enter username -->
+    <div class="fp-step" id="fpStep1">
+      <div class="fp-step__icon"><i class="fa-solid fa-key"></i></div>
+      <h3 class="fp-step__title" data-i18n="login.fp_titre">Mot de passe oublié ?</h3>
+      <p class="fp-step__desc" data-i18n="login.fp_desc1">Saisissez votre nom d'utilisateur. Un code de reinitialisation sera genere.</p>
+      <div class="fp-step__error" id="fpError1"></div>
+      <div class="login-field">
+        <label class="login-field__label" data-i18n="login.label_utilisateur">NOM D'UTILISATEUR</label>
+        <div class="login-field__wrap">
+          <i class="fa-solid fa-user login-field__icon"></i>
+          <input type="text" class="login-field__input" id="fpUsername" placeholder="ex. admin" data-i18n-placeholder="login.placeholder_utilisateur" required autocomplete="username"/>
+        </div>
+      </div>
+      <button class="login-btn fp-step__btn" id="fpSendBtn">
+        <span class="login-btn__text" data-i18n="login.generer_code">Generer le code</span>
+        <i class="fa-solid fa-arrow-right login-btn__arrow"></i>
+      </button>
+      <button class="fp-step__back" id="fpBackToLogin1"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="login.retour_connexion">Retour a la connexion</span></button>
+    </div>
+
+    <!-- Step 2: Token displayed -->
+    <div class="fp-step" id="fpStep2" style="display:none;">
+      <div class="fp-step__icon fp-step__icon--success"><i class="fa-solid fa-check"></i></div>
+      <h3 class="fp-step__title" data-i18n="login.fp_code_genere">Code genere</h3>
+      <p class="fp-step__desc" data-i18n="login.fp_desc2">Copiez ce code et collez-le a l'etape suivante. Valide pendant 15 minutes.</p>
+      <div class="fp-token-box">
+        <input type="text" class="fp-token-input" id="fpTokenDisplay" readonly/>
+        <button class="fp-token-copy" id="fpCopyToken" data-i18n-title="login.copier" title="Copier"><i class="fa-regular fa-copy"></i></button>
+      </div>
+      <button class="login-btn fp-step__btn" id="fpNextToReset">
+        <span class="login-btn__text" data-i18n="login.definir_nouveau_mdp">Definir un nouveau mot de passe</span>
+        <i class="fa-solid fa-arrow-right login-btn__arrow"></i>
+      </button>
+    </div>
+
+    <!-- Step 3: New password -->
+    <div class="fp-step" id="fpStep3" style="display:none;">
+      <div class="fp-step__icon"><i class="fa-solid fa-lock"></i></div>
+      <h3 class="fp-step__title" data-i18n="login.nouveau_mdp">Nouveau mot de passe</h3>
+      <p class="fp-step__desc" data-i18n="login.fp_desc3">Collez le code recu et choisissez un nouveau mot de passe (6 caracteres min.).</p>
+      <div class="fp-step__error" id="fpError3"></div>
+      <div class="fp-step__success" id="fpSuccess3"></div>
+      <div class="login-field">
+        <label class="login-field__label" data-i18n="login.label_code_reset">CODE DE REINITIALISATION</label>
+        <div class="login-field__wrap">
+          <i class="fa-solid fa-ticket login-field__icon"></i>
+          <input type="text" class="login-field__input" id="fpTokenInput" placeholder="Collez votre code ici" data-i18n-placeholder="login.placeholder_code" required/>
+        </div>
+      </div>
+      <div class="login-field">
+        <label class="login-field__label" data-i18n="login.label_nouveau_mdp">NOUVEAU MOT DE PASSE</label>
+        <div class="login-field__wrap">
+          <i class="fa-solid fa-lock login-field__icon"></i>
+          <input type="password" class="login-field__input" id="fpNewPassword" placeholder="Min. 6 caracteres" data-i18n-placeholder="login.placeholder_mdp_min" required autocomplete="new-password"/>
+          <button type="button" class="login-field__toggle" id="toggleFpPassword" aria-label="Toggle password visibility">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+      </div>
+      <button class="login-btn fp-step__btn" id="fpResetBtn">
+        <span class="login-btn__text" data-i18n="login.reinitialiser">Reinitialiser</span>
+        <i class="fa-solid fa-check login-btn__arrow"></i>
+      </button>
+      <button class="fp-step__back" id="fpBackToLogin3"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="login.retour_connexion">Retour a la connexion</span></button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/particles.js?v=2.2"></script>
+<script src="/js/login-i18n.js?v=2.2"></script>
+<script src="/js/login.js?v=2.2"></script>
+<script src="/js/theme.js?v=2.2"></script>
+</body>
+</html>

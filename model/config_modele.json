@@ -1,0 +1,17 @@
+{
+    "seuil_decision": 0.4266666666666667,
+    "modele": "Random Forest",
+    "parametres": {
+        "n_estimators": 300,
+        "max_depth": null,
+        "min_samples_split": 2
+    },
+    "performance": {
+        "accuracy": 0.9858889934148636,
+        "precision": 0.8970588235294118,
+        "recall": 0.7261904761904762,
+        "f1_score": 0.8026315789473685
+    },
+    "derniere_maj": "2026-07-24 10:32:38",
+    "nombre_donnees_entrainement": 10626
+}

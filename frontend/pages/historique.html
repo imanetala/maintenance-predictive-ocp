@@ -1,0 +1,101 @@
+<section class="page-section">
+  <div class="hist-stats kpi-banner stagger">
+    <div class="kpi-card">
+      <div class="kpi-card__value" id="histTotal">--</div>
+      <div class="kpi-card__label" data-i18n="accueil.mesures_totales">Total prédictions</div>
+    </div>
+    <div class="kpi-card danger">
+      <div class="kpi-card__value" id="histPannes">--</div>
+      <div class="kpi-card__label" data-i18n="accueil.pannes_predites">Pannes détectées</div>
+    </div>
+    <div class="kpi-card warning">
+      <div class="kpi-card__value" id="histRisque">--</div>
+      <div class="kpi-card__label" data-i18n="accueil.risque_moyen">Risque moyen</div>
+    </div>
+  </div>
+
+  <div class="export-btns" style="margin-bottom:12px;">
+    <button class="btn btn-outline" id="btnHistExcel" type="button"><i data-lucide="table"></i><span data-i18n="historique.export_excel">Excel</span></button>
+    <button class="btn btn-outline" id="btnHistPDF" type="button"><i data-lucide="file-text"></i><span data-i18n="historique.export_pdf">PDF</span></button>
+  </div>
+
+  <div class="table-wrap hist-table-wrap">
+    <table class="table hist-table" id="histTable">
+      <thead>
+        <tr>
+          <th class="sortable" data-col="id" data-i18n="historique.id">ID <i data-lucide="arrow-up-down" class="sort-icon"></i></th>
+          <th class="sortable" data-col="date_prediction" data-i18n="historique.date_heure">Date/Heure <i data-lucide="arrow-up-down" class="sort-icon"></i></th>
+          <th class="sortable" data-col="equipement" data-i18n="historique.equipement">Équipement <i data-lucide="arrow-up-down" class="sort-icon"></i></th>
+          <th data-i18n="historique.temperature">Température</th>
+          <th data-i18n="historique.vibration">Vibration</th>
+          <th data-i18n="historique.pression">Pression</th>
+          <th data-i18n="historique.humidite">Humidité</th>
+          <th class="sortable" data-col="probabilite_panne" data-i18n="historique.probabilite">Probabilité <i data-lucide="arrow-up-down" class="sort-icon"></i></th>
+          <th class="sortable" data-col="panne_predite" data-i18n="historique.statut">Statut <i data-lucide="arrow-up-down" class="sort-icon"></i></th>
+          <th data-i18n="historique.recommandation">Recommandation</th>
+          <th data-i18n="historique.voir_details">Détails</th>
+          <th data-i18n="historique.supprimer">Suppr.</th>
+        </tr>
+      </thead>
+      <tbody id="histTbody">
+        <tr><td colspan="12" class="table__empty" data-i18n="historique.chargement">Chargement…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-bar" id="histPagination">
+    <div class="pagination-info">
+      <span id="histPaginationInfo">—</span>
+      <label class="pagination-size">
+        <select id="histPageSize">
+          <option value="10">10</option>
+          <option value="20" selected>20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </label>
+    </div>
+    <div class="pagination-btns">
+      <button class="btn btn-outline btn-sm" id="histPrev" type="button"><i data-lucide="chevron-left"></i></button>
+      <span class="pagination-pages" id="histPageNumbers"></span>
+      <button class="btn btn-outline btn-sm" id="histNext" type="button"><i data-lucide="chevron-right"></i></button>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="modalDetailOverlay" style="display:none;">
+    <div class="modal-card" id="modalDetail">
+      <div class="modal-header">
+        <h3 data-i18n="historique.voir_details">Détails de la prédiction</h3>
+        <button class="icon-btn" id="fermerModalDetail" type="button"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body" id="modalDetailBody"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+.hist-stats { margin-bottom: 16px; }
+.hist-table th { font-size: 0.7rem; white-space: nowrap; cursor: default; }
+.hist-table th.sortable { cursor: pointer; user-select: none; }
+.hist-table th.sortable:hover { color: var(--accent-primary); }
+.sort-icon { width: 12px; height: 12px; margin-left: 2px; opacity: 0.4; }
+.hist-table th.sorted .sort-icon { opacity: 1; color: var(--accent-primary); }
+.pagination-bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; flex-wrap: wrap; gap: 12px; }
+.pagination-info { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; color: var(--text-secondary); }
+.pagination-size select { padding: 6px 10px; border: 1px solid var(--border-soft); border-radius: var(--radius-sm); background: var(--bg-secondary); color: var(--text-primary); font-size: 0.8rem; }
+.pagination-btns { display: flex; align-items: center; gap: 6px; }
+.btn-sm { padding: 6px 10px; font-size: 0.8rem; }
+.pagination-pages { display: flex; gap: 4px; }
+.page-num { width: 32px; height: 32px; border: 1px solid var(--border-soft); border-radius: var(--radius-sm); background: var(--bg-secondary); color: var(--text-primary); font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast); }
+.page-num:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.page-num.active { background: var(--accent-primary); color: var(--text-on-primary); border-color: var(--accent-primary); }
+.recommandation-text { font-size: 0.75rem; color: var(--text-secondary); max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; display: flex; align-items: center; justify-content: center; }
+.modal-card { background: var(--bg-secondary); border: 1px solid var(--card-border); border-radius: var(--radius-xl); padding: 28px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.modal-field { display: flex; flex-direction: column; gap: 4px; }
+.modal-field__label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+.modal-field__value { font-size: 1rem; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); }
+</style>

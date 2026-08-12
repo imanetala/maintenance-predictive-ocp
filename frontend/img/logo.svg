@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <!-- Navy background gradient -->
+    <radialGradient id="navyBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A3A2F"/>
+      <stop offset="100%" stop-color="#122B21"/>
+    </radialGradient>
+    <!-- Gear gradient -->
+    <linearGradient id="gearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3A8A74"/>
+      <stop offset="50%" stop-color="#2F6F5E"/>
+      <stop offset="100%" stop-color="#255A4B"/>
+    </linearGradient>
+    <!-- Metallic wrench gradient -->
+    <linearGradient id="wrenchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D8DCE2"/>
+      <stop offset="30%" stop-color="#C9CED6"/>
+      <stop offset="60%" stop-color="#B8BEC8"/>
+      <stop offset="100%" stop-color="#A8AEB8"/>
+    </linearGradient>
+    <!-- Cyan glow -->
+    <filter id="cyanGlow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Gear body -->
+  <path d="M 128.00,30.00 L 138.02,13.44 L 157.76,16.92 L 161.52,35.91 L 177.00,43.13 L 193.96,33.80 L 209.32,46.68 L 203.07,65.01 L 212.87,79.00 L 232.23,79.40 L 239.08,98.24 L 224.51,110.98 L 226.00,128.00 L 242.56,138.02 L 239.08,157.76 L 220.09,161.52 L 212.87,177.00 L 222.20,193.96 L 209.32,209.32 L 190.99,203.07 L 177.00,212.87 L 176.60,232.23 L 157.76,239.08 L 145.02,224.51 L 128.00,226.00 L 117.98,242.56 L 98.24,239.08 L 94.48,220.09 L 79.00,212.87 L 62.04,222.20 L 46.68,209.32 L 52.93,190.99 L 43.13,177.00 L 23.77,176.60 L 16.92,157.76 L 31.49,145.02 L 30.00,128.00 L 13.44,117.98 L 16.92,98.24 L 35.91,94.48 L 43.13,79.00 L 33.80,62.04 L 46.68,46.68 L 65.01,52.93 L 79.00,43.13 L 79.40,23.77 L 98.24,16.92 L 110.98,31.49 Z"
+        fill="url(#gearGrad)" stroke="none"/>
+
+  <!-- Inner navy circle -->
+  <circle cx="128" cy="128" r="88" fill="url(#navyBg)"/>
+
+  <!-- Circuit lines (green) -->
+  <g stroke="#6FCF97" stroke-width="1.2" stroke-linecap="round" opacity="0.6">
+    <line x1="128" y1="86" x2="128" y2="56"/>
+    <line x1="157.7" y1="98.3" x2="178.9" y2="77.1"/>
+    <line x1="170" y1="128" x2="200" y2="128"/>
+    <line x1="157.7" y1="157.7" x2="178.9" y2="178.9"/>
+    <line x1="128" y1="170" x2="128" y2="200"/>
+    <line x1="98.3" y1="157.7" x2="77.1" y2="178.9"/>
+    <line x1="86" y1="128" x2="56" y2="128"/>
+    <line x1="98.3" y1="98.3" x2="77.1" y2="77.1"/>
+  </g>
+
+  <!-- Circuit nodes (small circles) -->
+  <g fill="#6FCF97" opacity="0.7">
+    <circle cx="128" cy="78" r="2.5"/>
+    <circle cx="128" cy="66" r="1.8"/>
+    <circle cx="163.4" cy="92.6" r="2.5"/>
+    <circle cx="171.8" cy="84.2" r="1.8"/>
+    <circle cx="178" cy="128" r="2.5"/>
+    <circle cx="190" cy="128" r="1.8"/>
+    <circle cx="163.4" cy="163.4" r="2.5"/>
+    <circle cx="171.8" cy="171.8" r="1.8"/>
+    <circle cx="128" cy="178" r="2.5"/>
+    <circle cx="128" cy="190" r="1.8"/>
+    <circle cx="92.6" cy="163.4" r="2.5"/>
+    <circle cx="84.2" cy="171.8" r="1.8"/>
+    <circle cx="78" cy="128" r="2.5"/>
+    <circle cx="66" cy="128" r="1.8"/>
+    <circle cx="92.6" cy="92.6" r="2.5"/>
+    <circle cx="84.2" cy="84.2" r="1.8"/>
+  </g>
+
+  <!-- Circuit chips (small squares) -->
+  <g fill="#6FCF97" opacity="0.5">
+    <rect x="125" y="69" width="6" height="6" rx="1"/>
+    <rect x="181" y="125" width="6" height="6" rx="1"/>
+    <rect x="125" y="181" width="6" height="6" rx="1"/>
+    <rect x="69" y="125" width="6" height="6" rx="1"/>
+  </g>
+
+  <!-- Wrench (silver metallic, diagonal) -->
+  <path d="M 176.08,181.74 L 165.48,171.13 L 105.37,111.03 L 91.23,96.89 L 79.92,96.89 L 68.60,85.57 L 62.95,79.92 L 62.95,74.26 L 74.26,62.95 L 79.92,62.95 L 85.57,68.60 L 96.89,79.92 L 96.89,91.23 L 111.03,105.37 L 171.13,165.48 L 181.74,176.08 Z"
+        fill="url(#wrenchGrad)" stroke="#9CA3AF" stroke-width="0.5"/>
+
+  <!-- Wrench jaw cutout -->
+  <path d="M 85.57,88.40 L 94.06,96.89 L 94.06,102.54 L 101.13,109.62 L 109.62,101.13 L 102.54,94.06 L 96.89,94.06 L 88.40,85.57 Z"
+        fill="#122B21"/>
+
+  <!-- Wrench center bolt -->
+  <circle cx="173.3" cy="173.3" r="5" fill="#B8BEC8" stroke="#9CA3AF" stroke-width="0.5"/>
+  <circle cx="173.3" cy="173.3" r="2.5" fill="#2F6F5E"/>
+</svg>

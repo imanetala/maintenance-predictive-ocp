@@ -1,0 +1,83 @@
+<section class="page-section">
+  <div class="predict-grid">
+    <div class="predict-card">
+      <h3 data-i18n="prediction.entree_mesures">Entrée des mesures</h3>
+      <div class="preset-row">
+        <button class="preset btn btn-outline" type="button" data-preset="normal"><i data-lucide="check-circle"></i><span data-i18n="prediction.scenario_normal">Scénario normal</span></button>
+        <button class="preset btn btn-outline" type="button" data-preset="risque"><i data-lucide="alert-triangle"></i><span data-i18n="prediction.scenario_risque">Scénario à risque</span></button>
+      </div>
+
+      <form id="formPrediction" class="predict-form">
+        <label class="field">
+          <span class="field__label" data-i18n="prediction.equipement">Équipement</span>
+          <select id="equipement_id" class="field__input">
+            <option value="" disabled selected data-i18n="historique.chargement">Chargement…</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label" data-i18n="prediction.type_produit">Type produit</span>
+          <select id="type_produit" class="field__input">
+            <option value="L">L — Low</option>
+            <option value="M" selected>M — Medium</option>
+            <option value="H">H — High</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label" data-i18n="prediction.temp_air">Température air (K)</span>
+          <input type="number" id="air_temperature" class="field__input" step="0.1" value="298" required>
+        </label>
+        <label class="field">
+          <span class="field__label" data-i18n="prediction.temp_proc">Température process (K)</span>
+          <input type="number" id="process_temperature" class="field__input" step="0.1" value="308" required>
+        </label>
+        <label class="field">
+          <span class="field__label" data-i18n="prediction.rotation">Vitesse rotation (rpm)</span>
+          <input type="number" id="rotational_speed" class="field__input" value="1500" required>
+        </label>
+        <label class="field">
+          <span class="field__label" data-i18n="prediction.couple">Couple (Nm)</span>
+          <input type="number" id="torque" class="field__input" step="0.1" value="40" required>
+        </label>
+        <label class="field">
+          <span class="field__label" data-i18n="prediction.usure_outil">Usure outil (min)</span>
+          <input type="number" id="tool_wear" class="field__input" value="10" required>
+        </label>
+        <button type="submit" class="btn btn-primary" id="btnAnalyser" style="justify-content:center;"><i data-lucide="zap"></i><span data-i18n="prediction.lancer_analyse">Lancer l'analyse</span></button>
+      </form>
+    </div>
+
+    <div class="predict-card result-card">
+      <h3 data-i18n="prediction.resultat_prediction">Résultat de la prédiction</h3>
+      <div class="jauge-wrap">
+        <svg class="jauge" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(148,163,184,0.1)" stroke-width="12"/>
+          <circle id="gaugeCircle" cx="100" cy="100" r="85" fill="none" stroke="#10B981"
+                  stroke-width="12" stroke-linecap="round"
+                  stroke-dasharray="534" stroke-dashoffset="534"
+                  transform="rotate(-90 100 100)"/>
+        </svg>
+        <div class="jauge__text">
+          <div class="jauge__pct" id="gaugePct">--%</div>
+          <div class="jauge__label" data-i18n="prediction.risque_label">risque</div>
+        </div>
+      </div>
+
+      <div class="verdict">
+        <span class="verdict__badge" id="verdictBadge" data-i18n="prediction.en_attente">EN ATTENTE</span>
+        <p class="verdict__text" id="verdictText" data-i18n="prediction.en_attente">Entrez les mesures d'un équipement et lancez l'analyse pour obtenir une prédiction.</p>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-item"><span data-i18n="prediction.seuil">Seuil</span><span id="metaSeuil">—</span></div>
+        <div class="meta-item"><span data-i18n="prediction.mesure">Mesure</span><span id="metaMesure">—</span></div>
+      </div>
+
+      <div class="zone-explication" id="zoneExplication"></div>
+
+      <div class="zone-rul" id="zoneRUL" style="display:none;">
+        <span class="rul-label" data-i18n="prediction.duree_vie_restante">Durée de vie restante estimée</span>
+        <span class="rul-value" id="rulJours">—</span>
+      </div>
+    </div>
+  </div>
+</section>

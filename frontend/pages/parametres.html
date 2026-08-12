@@ -1,0 +1,57 @@
+<section class="page-section">
+  <div class="settings-grid">
+    <div class="predict-card">
+      <h3 data-i18n="parametres.parametres_generaux">Paramètres généraux</h3>
+      <form id="formSettings" style="display:flex;flex-direction:column;gap:16px;">
+        <label class="field">
+          <span class="field__label" data-i18n="parametres.seuil_alerte">Seuil d'alerte</span>
+          <input type="number" id="settSeuil" class="field__input" step="0.01" min="0" max="1" value="0.71">
+        </label>
+        <label class="field">
+          <span class="field__label" data-i18n="parametres.langue">Langue</span>
+          <select id="settLangue" class="field__input">
+            <option value="fr" data-i18n="parametres.francais">Français</option>
+            <option value="en" data-i18n="parametres.anglais">English</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label" data-i18n="parametres.theme">Thème</span>
+          <select id="settTheme" class="field__input">
+            <option value="dark" data-i18n="parametres.sombre">Sombre</option>
+            <option value="light" data-i18n="parametres.claire">Clair</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label" data-i18n="parametres.notifications_email">Notifications email</span>
+          <select id="settEmailNotif" class="field__input">
+            <option value="1" data-i18n="parametres.activees">Activées</option>
+            <option value="0" data-i18n="parametres.desactivees">Désactivées</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;"><i data-lucide="save"></i><span data-i18n="parametres.sauvegarder">Sauvegarder</span></button>
+      </form>
+    </div>
+
+    <div class="predict-card">
+      <h3 data-i18n="parametres.mon_profil">Mon profil</h3>
+      <div class="profile-card">
+        <div class="user-avatar" id="profileAvatar" style="width:48px;height:48px;font-size:1rem;">--</div>
+        <div>
+          <div class="user-name" id="profileNom" style="font-size:1rem;">—</div>
+          <div class="user-role" id="profileRole">—</div>
+          <div class="risk-value" style="margin-top:6px;font-size:0.8rem;"><span data-i18n="parametres.membre_depuis">Membre depuis</span> <span id="profileDate" style="color:var(--text-secondary);">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="predict-card">
+      <h3 data-i18n="parametres.changer_mdp">Changer le mot de passe</h3>
+      <form id="formPassword" style="display:flex;flex-direction:column;gap:16px;">
+        <label class="field"><span class="field__label" data-i18n="parametres.mdp_actuel">Mot de passe actuel</span><input type="password" id="ancienMdp" class="field__input" required></label>
+        <label class="field"><span class="field__label" data-i18n="parametres.nouveau_mdp">Nouveau mot de passe</span><input type="password" id="nouveauMdp" class="field__input" required minlength="6"></label>
+        <label class="field"><span class="field__label" data-i18n="parametres.confirmer">Confirmer</span><input type="password" id="confirmerMdp" class="field__input" required minlength="6"></label>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;"><i data-lucide="lock"></i><span data-i18n="parametres.changer_mdp">Changer le mot de passe</span></button>
+      </form>
+    </div>
+  </div>
+</section>

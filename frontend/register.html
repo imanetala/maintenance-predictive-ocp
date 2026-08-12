@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="register.page_titre">Inscription — Maintenance Prédictive OCP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="/css/login.css"/>
+</head>
+<body>
+<div class="auth">
+
+  <!-- ======================== LEFT COLUMN (60%) ======================== -->
+  <div class="auth-left">
+    <canvas id="loginCanvas" class="auth-left__particles"></canvas>
+
+    <div class="auth-left__content">
+      <div class="auth-left__logo">
+        <svg class="auth-left__logo-icon" width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="38" height="38" rx="10" fill="url(#logo-grad)"/>
+          <path d="M19 11.5a3 3 0 100 6 3 3 0 000-6z" fill="#fff"/>
+          <path d="M19 8.5v2.2m0 11.6V24.5m6-3.5l-1.6-1m-8.8 0l-1.6 1M25 14.1l-1.6 1m-8.8 0l-1.6-1" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M9.5 28l3.2-2.8 2.5 1.8 3.8-3.2 3.8 3.2 2.5-1.8L28.5 28" stroke="#A7F3D0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="0" y1="0" x2="38" y2="38">
+              <stop stop-color="#10B981"/>
+              <stop offset="1" stop-color="#047857"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="auth-left__logo-text">
+          <span class="auth-left__logo-name" data-i18n="register.hero_titre_1">Maintenance Prédictive OCP</span>
+          <span class="auth-left__logo-sub" data-i18n="register.hero_texte">Plateforme intelligente de supervision et de maintenance industrielle.</span>
+        </div>
+      </div>
+
+      <h1 class="auth-left__title">
+        <span data-i18n="register.hero_titre_2">Rejoindre la plateforme<br/>de maintenance <span class="auth-left__title-accent">prédictive.</span></span>
+      </h1>
+
+      <p class="auth-left__desc" data-i18n="register.hero_description">
+        Créez votre accès à la console de supervision, lancez des prédictions et surveillez les équipements industriels en temps réel avec l'analytique IA.
+      </p>
+
+      <div class="auth-left__features">
+        <div class="feat feat--1"><span class="feat__icon"><i class="fa-solid fa-microchip"></i></span><span class="feat__label" data-i18n="register.feat_modele">Modèle Random Forest</span></div>
+        <div class="feat feat--2"><span class="feat__icon"><i class="fa-solid fa-heart-pulse"></i></span><span class="feat__label" data-i18n="register.feat_supervision">Supervision temps réel</span></div>
+        <div class="feat feat--3"><span class="feat__icon"><i class="fa-solid fa-shield-halved"></i></span><span class="feat__label" data-i18n="register.feat_risque">Score de risque</span></div>
+        <div class="feat feat--4"><span class="feat__icon"><i class="fa-solid fa-chart-line"></i></span><span class="feat__label" data-i18n="register.feat_historique">Historique &amp; tendances</span></div>
+      </div>
+
+      <div class="auth-left__ticker">
+        <span class="ticker__item" data-i18n="register.ticker_modele">MODÈLE <span class="ticker__val">RANDOM FOREST</span></span>
+        <span class="ticker__sep">·</span>
+        <span class="ticker__item">F1-SCORE <span class="ticker__val">80.3%</span></span>
+        <span class="ticker__sep">·</span>
+        <span class="ticker__item">DATASET <span class="ticker__val">AI4I 2020</span></span>
+        <span class="ticker__sep">·</span>
+        <span class="ticker__item"><span class="ticker__val">10 000+</span> <span data-i18n="register.ticker_lignes">LIGNES</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== RIGHT COLUMN (40%) ======================== -->
+  <div class="auth-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <div class="auth-right__inner">
+      <div class="login-badge"><i class="fa-solid fa-user-plus"></i><span data-i18n="register.badge_nouveau">NOUVEAU COMPTE</span></div>
+
+      <h2 class="login-title" data-i18n="register.inscription">Créer un compte</h2>
+      <p class="login-sub" data-i18n="register.sous_titre">Rejoignez la plateforme de maintenance prédictive.</p>
+
+      <div class="login-error" id="registerError"></div>
+
+      <form class="login-form" id="registerForm" autocomplete="off" novalidate>
+        <div class="login-field">
+          <label class="login-field__label" data-i18n="login.label_utilisateur">NOM D'UTILISATEUR</label>
+          <div class="login-field__wrap">
+            <i class="fa-solid fa-user login-field__icon"></i>
+            <input type="text" class="login-field__input" id="username" name="username" placeholder="Choisissez un nom d'utilisateur" data-i18n-placeholder="register.placeholder_utilisateur" required autocomplete="username"/>
+          </div>
+        </div>
+
+        <div class="login-field">
+          <label class="login-field__label" data-i18n="login.label_mdp">MOT DE PASSE</label>
+          <div class="login-field__wrap">
+            <i class="fa-solid fa-lock login-field__icon"></i>
+            <input type="password" class="login-field__input" id="password" name="password" placeholder="Créez un mot de passe" data-i18n-placeholder="register.placeholder_mdp" required autocomplete="new-password"/>
+            <button type="button" class="login-field__toggle" id="togglePassword" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="login-field">
+          <label class="login-field__label" data-i18n="register.confirmer_mdp">CONFIRMER LE MOT DE PASSE</label>
+          <div class="login-field__wrap">
+            <i class="fa-solid fa-lock login-field__icon"></i>
+            <input type="password" class="login-field__input" id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre mot de passe" data-i18n-placeholder="register.placeholder_confirmer" required autocomplete="new-password"/>
+            <button type="button" class="login-field__toggle" id="toggleConfirmPassword" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="login-btn" id="registerBtn">
+          <span class="login-btn__text" data-i18n="register.creer_compte">Créer mon compte</span>
+          <i class="fa-solid fa-arrow-right login-btn__arrow"></i>
+        </button>
+      </form>
+
+      <div class="login-card__footer">
+        <span class="login-card__footer-text" data-i18n="register.deja_compte">Vous avez déjà un compte ?</span>
+        <a href="/login" class="login-register-link"><span data-i18n="register.se_connecter">Se connecter</span> <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="auth-right__footer" data-i18n="login.acces_reserve">
+        Personnel autorisé uniquement · Toutes les sessions sont auditées
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="/js/particles.js"></script>
+<script src="/js/login-i18n.js"></script>
+<script src="/js/login.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+</html>

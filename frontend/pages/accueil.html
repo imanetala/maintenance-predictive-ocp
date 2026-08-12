@@ -1,0 +1,167 @@
+<section class="page-section" id="accueilPage">
+
+  <!-- 1. EN-TÊTE -->
+  <div class="accueil-greeting">
+    <div class="accueil-greeting-left">
+      <div class="welcome-text" id="welcomeText" data-i18n="accueil.bonjour">Bonjour.</div>
+      <div class="welcome-datetime" id="welcomeDateTime"></div>
+    </div>
+  </div>
+
+  <!-- 2. CARTES KPI (6) -->
+  <div class="kpi-grid-6" id="accueilKpis">
+    <div class="kpi-card blue">
+      <div class="kpi-icon blue"><i data-lucide="cpu"></i></div>
+      <div class="kpi-body">
+        <div class="kpi-card__value" id="kpiEquipements">--</div>
+        <div class="kpi-card__label" data-i18n="accueil.equipements_suivis">Équipements suivis</div>
+      </div>
+    </div>
+    <div class="kpi-card safe">
+      <div class="kpi-icon green"><i data-lucide="check-circle"></i></div>
+      <div class="kpi-body">
+        <div class="kpi-card__value" id="kpiNormales">--</div>
+        <div class="kpi-card__label" data-i18n="accueil.analyses_normales">Analyses normales</div>
+      </div>
+    </div>
+    <div class="kpi-card danger" id="kpiPannesCard">
+      <div class="kpi-icon red"><i data-lucide="alert-triangle"></i></div>
+      <div class="kpi-body">
+        <div class="kpi-card__value" id="kpiPannes">--</div>
+        <div class="kpi-card__label" data-i18n="accueil.pannes_detectees">Pannes détectées</div>
+      </div>
+    </div>
+    <div class="kpi-card warning">
+      <div class="kpi-icon orange"><i data-lucide="shield-alert"></i></div>
+      <div class="kpi-body">
+        <div class="kpi-card__value" id="kpiRisqueEleve">--</div>
+        <div class="kpi-card__label" data-i18n="accueil.equipements_risque_eleve">Équipements à risque élevé</div>
+      </div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-icon blue"><i data-lucide="database"></i></div>
+      <div class="kpi-body">
+        <div class="kpi-card__value" id="kpiTotal">--</div>
+        <div class="kpi-card__label" data-i18n="accueil.analyses_totales">Analyses totales</div>
+      </div>
+    </div>
+    <div class="kpi-card safe">
+      <div class="kpi-icon green"><i data-lucide="brain"></i></div>
+      <div class="kpi-body">
+        <div class="kpi-card__value" id="kpiF1">--</div>
+        <div class="kpi-card__label" data-i18n="accueil.f1_modele">F1-score du modèle</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. JAUGE DE SANTÉ GLOBALE -->
+  <div class="health-row">
+    <div class="health-gauge-card">
+      <div class="health-gauge-wrap">
+        <svg class="health-gauge-svg" viewBox="0 0 200 200">
+          <circle class="health-gauge-bg" cx="100" cy="100" r="85"></circle>
+          <circle class="health-gauge-fill" id="healthGaugeFill" cx="100" cy="100" r="85"
+            stroke-dasharray="534" stroke-dashoffset="534"></circle>
+        </svg>
+        <div class="health-gauge-text">
+          <div class="health-gauge-pct" id="healthGaugePct">--</div>
+          <div class="health-gauge-label" data-i18n="accueil.sante_globale">Santé globale</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. TABLEAU DES ÉQUIPEMENTS -->
+    <div class="critical-card">
+      <div class="critical-card-header">
+        <h3 data-i18n="accueil.etat_equipements">État des équipements</h3>
+      </div>
+      <div class="table-wrap" style="border:none;border-radius:0;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th data-i18n="accueil.col_equipement">Équipement</th>
+              <th data-i18n="accueil.col_localisation">Localisation</th>
+              <th data-i18n="accueil.col_risque_moyen">Risque moyen</th>
+              <th data-i18n="accueil.col_statut">Statut</th>
+              <th data-i18n="accueil.col_action">Action</th>
+            </tr>
+          </thead>
+          <tbody id="equipementsTbody">
+            <tr><td colspan="5" class="table__empty" data-i18n="commun.chargement">Chargement...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. GRAPHIQUE D'ÉVOLUTION -->
+  <div class="chart-container accueil-chart-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+      <h3 style="margin:0;" data-i18n="accueil.evolution_risque">Évolution du risque</h3>
+      <div class="time-filter-pills" id="evolutionFilter">
+        <button class="time-pill" data-period="24h" data-i18n="accueil.periode_24h">24h</button>
+        <button class="time-pill active" data-period="7j" data-i18n="accueil.periode_7j">7 jours</button>
+        <button class="time-pill" data-period="30j" data-i18n="accueil.periode_30j">30 jours</button>
+      </div>
+    </div>
+    <div class="accueil-chart-wrap">
+      <canvas id="graphiqueEvolution"></canvas>
+    </div>
+  </div>
+
+  <!-- 6. RÉPARTITION DES PANNES -->
+  <div class="panne-grid">
+    <div class="panne-chart-card">
+      <h3 data-i18n="accueil.repartition_pannes">Répartition des pannes</h3>
+      <div style="position:relative;height:280px;display:flex;align-items:center;justify-content:center;">
+        <canvas id="accueilDonutChart"></canvas>
+        <div class="donut-center-text">
+          <div class="donut-center-value" id="donutCenterValue">--</div>
+          <div class="donut-center-label" data-i18n="commun.total">Total</div>
+        </div>
+      </div>
+    </div>
+    <div class="panne-chart-card">
+      <h3 data-i18n="accueil.pannes_par_equipement">Pannes par équipement</h3>
+      <div style="height:280px;">
+        <canvas id="accueilBarChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. TIMELINE DES ALERTES RÉCENTES -->
+  <div class="timeline-card">
+    <div class="timeline-card-header">
+      <h3 data-i18n="accueil.alertes_recents">Alertes récentes</h3>
+      <a href="#" class="link-accent" style="font-size:0.82rem;" onclick="loadPage('alertes');return false;" data-i18n="accueil.voir_toutes_alertes">Voir toutes les alertes</a>
+    </div>
+    <div id="accueilTimeline">
+      <div class="timeline-empty">
+        <i data-lucide="bell-off"></i>
+        <span data-i18n="accueil.aucune_alerte">Aucune alerte pour le moment</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. ACCÈS RAPIDE -->
+  <h3 class="accueil-section-title" data-i18n="accueil.acces_rapide">Accès rapide</h3>
+  <div class="quick-access-grid">
+    <a class="quick-access-btn" href="#" onclick="loadPage('prediction');return false;">
+      <i data-lucide="activity"></i>
+      <span data-i18n="accueil.nouvelle_analyse">Nouvelle analyse</span>
+    </a>
+    <a class="quick-access-btn" href="#" onclick="loadPage('rapports');return false;">
+      <i data-lucide="file-text"></i>
+      <span data-i18n="accueil.exporter_rapport">Exporter rapport</span>
+    </a>
+    <a class="quick-access-btn" href="#" onclick="loadPage('alertes');return false;">
+      <i data-lucide="bell"></i>
+      <span data-i18n="accueil.voir_alertes">Voir alertes</span>
+    </a>
+    <a class="quick-access-btn" href="#" onclick="loadPage('monitoring');return false;">
+      <i data-lucide="brain"></i>
+      <span data-i18n="accueil.monitoring_modele">Monitoring modèle</span>
+    </a>
+  </div>
+
+</section>

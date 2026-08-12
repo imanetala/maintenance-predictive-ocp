@@ -1,0 +1,34 @@
+<section class="page-section">
+  <div class="kpi-banner stagger">
+    <div class="kpi-card">
+      <div class="kpi-card__value" id="anaTempMoy">--</div>
+      <div class="kpi-card__label" data-i18n="analytics.temp_moy">Temp. moyenne</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card__value" id="anaCoupleMoy">--</div>
+      <div class="kpi-card__label" data-i18n="analytics.couple_moy">Couple moyen</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-card__value" id="anaTotalMesures">--</div>
+      <div class="kpi-card__label" data-i18n="analytics.total_mesures">Total mesures</div>
+    </div>
+    <div class="kpi-card danger">
+      <div class="kpi-card__value" id="anaTauxPanne">--</div>
+      <div class="kpi-card__label" data-i18n="analytics.taux_panne">Taux de panne</div>
+    </div>
+  </div>
+
+  <div class="analytics-grid stagger">
+    <div class="chart-container hover-lift"><h3 data-i18n="analytics.distributions">Distribution température</h3><canvas id="graphiqueDistribTemp"></canvas></div>
+    <div class="chart-container hover-lift"><h3 data-i18n="analytics.distrib_couple">Distribution couple</h3><canvas id="graphiqueDistribTorque"></canvas></div>
+    <div class="chart-container hover-lift"><h3 data-i18n="analytics.distrib_rotation">Distribution rotation</h3><canvas id="graphiqueDistribRPM"></canvas></div>
+    <div class="chart-container hover-lift"><h3 data-i18n="analytics.taux_panne_titre">Taux de panne par équipement</h3><canvas id="graphiqueTauxPanne"></canvas></div>
+    <div class="chart-container hover-lift"><h3 data-i18n="analytics.sante_equipements">Distribution état de santé</h3><canvas id="graphiqueHealth"></canvas></div>
+    <div class="chart-container hover-lift"><h3 data-i18n="analytics.top_causes">Variables critiques (pannes)</h3><canvas id="graphiqueTopCauses"></canvas></div>
+  </div>
+
+  <div class="chart-container hover-lift">
+    <h3 data-i18n="analytics.correlation">Matrice de corrélation</h3>
+    <div id="heatmapCorrelation"></div>
+  </div>
+</section>
